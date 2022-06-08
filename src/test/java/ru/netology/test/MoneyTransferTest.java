@@ -76,9 +76,8 @@ public class MoneyTransferTest {
         int amount = 15000;
         var moneyTransferPage = dashboardPage.transferMoneyTo(1);
         moneyTransferPage.transferMoneyFrom(2, amount);
-        //there should be an error and transfer should not happen, but real situation is:
-        dashboardPage.headingShouldBeVisible();
-        assertEquals(cardOneBalance + amount, dashboardPage.getCardBalance(1));
-        assertEquals(cardTwoBalance - amount, dashboardPage.getCardBalance(2));//balance became negative
+        moneyTransferPage.shouldPrintError();
+        assertEquals(cardOneBalance, dashboardPage.getCardBalance(1));
+        assertEquals(cardTwoBalance, dashboardPage.getCardBalance(2));
     }
 }

@@ -16,13 +16,13 @@ public class DashboardPage {
     }
     
     public MoneyTransferPage transferMoneyTo(int id) {
-        cards.findBy(attribute("data-test-id", DataHelper.getCardTestId(id)))
+        cards.findBy(attribute("data-test-id", DataHelper.getCard(id).getDataTestId()))
                 .find(".button").click();
         return new MoneyTransferPage();
     }
     
     public int getCardBalance(int id) {
-        String text = cards.findBy(attribute("data-test-id", DataHelper.getCardTestId(id))).text();
+        String text = cards.findBy(attribute("data-test-id", DataHelper.getCard(id).getDataTestId())).text();
         return extractBalance(text);
     }
     
@@ -33,7 +33,7 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
     
-    public void headingShouldBeVisible(){
+    public void headingShouldBeVisible() {
         $x("//*[text() = 'Ваши карты']").should(visible);
     }
 }
